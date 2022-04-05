@@ -222,6 +222,7 @@ def main():
         user_stats(df)
 
         # allows user to view raw data after day/month filters
+        """Function to allow user to request and view raw data 5 rows at a time."""
         raw_data = input('\nWould you like to view 5 rows of the raw data? Enter yes or no.\n')
         n = 0
         while raw_data.lower() == 'yes' and n <= len(df.index):
