@@ -221,8 +221,8 @@ def main():
         raw_data = input('\nWould you like to view 5 rows of the raw data? Enter yes or no.\n')
         n = 0
         while raw_data.lower() == 'yes' and n <= len(df.index):
-            print(df.iloc[n:n+5000])
-            n += 5000
+            print(df.iloc[n:n+5])
+            n += 5
             raw_data = input('\nWould you like to view 5 more rows of the raw data? Enter yes or no.\n')
 
         # asks user if they wish to restart
