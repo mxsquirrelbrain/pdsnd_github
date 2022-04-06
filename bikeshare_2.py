@@ -123,21 +123,18 @@ def time_stats(df, user_filter):
     # display the most common month
     if user_filter != 'month':
         df['month'] = df['Start Time'].dt.strftime('%B')
-        popular_month = df['month'].mode()[0]
-        print('Bikeshare users most often used this service in the month of {}.'.format(popular_month))
+        print('Bikeshare users most often used this service in the month of {}.'.format(df['month'].mode()[0]))
 
     # display the most common day of week
     if user_filter != 'day':
-        popular_day = df['day_of_week'].mode()[0]
-        print('Bikeshare users most often used this service on {}.'.format(popular_day))
+        print('Bikeshare users most often used this service on {}.'.format(df['day_of_week'].mode()[0]))
 
     # display the most common start hour
     # extract hour from the Start Time column to create an hour column
     df['hour'] = df['Start Time'].dt.hour
 
     # find the most popular hour
-    popular_hour = df['hour'].mode()[0]
-    print('Bikeshare users most often started their journey in hour {}.'.format(popular_hour))
+    print('Bikeshare users most often started their journey in hour {}.'.format(df['hour'].mode()[0]))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -210,6 +207,15 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def raw_data(df):
+    # allows user to view raw data after day/month filters
+    """Function to allow user to request and view raw data 5 rows at a time."""
+    raw_data = input('\nWould you like to view 5 rows of the raw data? Enter yes or no.\n')
+    n = 0
+    while raw_data.lower() == 'yes' and n <= len(df.index):
+        print(df.iloc[n:n+5])
+        n += 5
+        raw_data = input('\nWould you like to view 5 more rows of the raw data? Enter yes or no.\n')
 
 def main():
     while True:
@@ -220,15 +226,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-        # allows user to view raw data after day/month filters
-        """Function to allow user to request and view raw data 5 rows at a time."""
-        raw_data = input('\nWould you like to view 5 rows of the raw data? Enter yes or no.\n')
-        n = 0
-        while raw_data.lower() == 'yes' and n <= len(df.index):
-            print(df.iloc[n:n+5])
-            n += 5
-            raw_data = input('\nWould you like to view 5 more rows of the raw data? Enter yes or no.\n')
+        raw_data(df)
 
         # asks user if they wish to restart
         restart = input('\nWould you like to restart? Enter yes or no.\n')
