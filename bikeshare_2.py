@@ -119,21 +119,18 @@ def time_stats(df, user_filter):
     # display the most common month
     if user_filter != 'month':
         df['month'] = df['Start Time'].dt.strftime('%B')
-        popular_month = df['month'].mode()[0]
-        print('Bikeshare users most often used this service in the month of {}.'.format(popular_month))
+        print('Bikeshare users most often used this service in the month of {}.'.format(df['month'].mode()[0]))
 
     # display the most common day of week
     if user_filter != 'day':
-        popular_day = df['day_of_week'].mode()[0]
-        print('Bikeshare users most often used this service on {}.'.format(popular_day))
+        print('Bikeshare users most often used this service on {}.'.format(df['day_of_week'].mode()[0]))
 
     # display the most common start hour
     # extract hour from the Start Time column to create an hour column
     df['hour'] = df['Start Time'].dt.hour
 
     # find the most popular hour
-    popular_hour = df['hour'].mode()[0]
-    print('Bikeshare users most often started their journey in hour {}.'.format(popular_hour))
+    print('Bikeshare users most often started their journey in hour {}.'.format(df['hour'].mode()[0]))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
