@@ -111,7 +111,11 @@ def load_data(city, month, day):
     return df
 
 def time_stats(df, user_filter):
-    """Displays statistics on the most frequent times of travel."""
+    """Displays statistics on the most frequent times of travel.
+    Args:
+        df - Pandas DataFrame containing city data filtered by month and day
+        (str) user_filter - user selected filter controlling which time stats are included
+    """
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -218,6 +222,7 @@ def main():
         user_stats(df)
 
         # allows user to view raw data after day/month filters
+        """Function to allow user to request and view raw data 5 rows at a time."""
         raw_data = input('\nWould you like to view 5 rows of the raw data? Enter yes or no.\n')
         n = 0
         while raw_data.lower() == 'yes' and n <= len(df.index):
